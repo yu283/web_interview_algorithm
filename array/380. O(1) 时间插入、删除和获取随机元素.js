@@ -8,7 +8,8 @@ int getRandom() 随机返回现有集合中的一项（测试用例保证调用�
 */
 
 class RandomizedSet {
-
+  map = new Map()
+  arr = []
 }
 
 /**
@@ -16,7 +17,14 @@ class RandomizedSet {
  * @return {boolean}
  */
 RandomizedSet.prototype.insert = function(val) {
-
+  if (this.map.has(val)) {
+    return false
+  }
+  else {
+    this.arr.push(val)
+    this.map.set(val,this.arr.length-1)
+    return true
+  }
 }
 
 /**
@@ -24,14 +32,24 @@ RandomizedSet.prototype.insert = function(val) {
  * @return {boolean}
  */
 RandomizedSet.prototype.remove = function(val) {
-
+  if (this.map.has(val)) {
+    let index = this.map.get(val)
+    let lastVal = this.arr[this.arr.length-1]
+    this.arr[index] = lastVal
+    this.arr.pop()
+    this.map.set(lastVal,index)
+    this.map.delete(val)
+    return true
+  } else {
+    return false
+  }
 }
 
 /**
  * @return {number}
  */
 RandomizedSet.prototype.getRandom = function() {
-
+  return this.arr[Math.floor(Math.random()*this.arr.length)]
 }
 
 /**
