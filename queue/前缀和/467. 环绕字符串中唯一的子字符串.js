@@ -11,5 +11,5 @@ const findSubstringInWraproundString = function (p) {
   }
   return arr.reduce((pre, cur) => pre + cur
   )
-};
+}
 
